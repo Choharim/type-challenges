@@ -16,8 +16,15 @@ type cases = [
 ];
 
 // ============= Your Code Here =============
-type MyAwaited<T> = T extends Promise<infer R>
-  ? MyAwaited<R>
-  : T extends PromiseLike<infer P>
-  ? P
-  : T;
+
+//
+// type MyAwaited<T> = T extends Promise<infer R>
+//   ? MyAwaited<R>
+//   : T extends PromiseLike<infer P>
+//   ? P
+//   : T;
+
+/**
+ * Promise 타입은 PromiseLike를 포함하고 있으므로 다음과 같이 간단히 변경할 수 있다.
+ */
+type MyAwaited<T> = T extends PromiseLike<infer U> ? MyAwaited<U> : T;
