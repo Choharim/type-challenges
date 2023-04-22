@@ -10,4 +10,4 @@ type cases = [
 type error = If<null, "a", "b">;
 
 // ============= Your Code Here =============
-type If<C, T, F> = C extends true ? T : F;
+type If<C extends boolean, T, F> = C extends true ? T : F;
