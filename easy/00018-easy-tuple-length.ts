@@ -1,5 +1,5 @@
 // ============= Test Cases =============
-import type { Equal, Expect } from "./test-utils";
+import type { Equal, Expect } from "../test-utils";
 
 const tesla = ["tesla", "model 3", "model X", "model Y"] as const;
 const spaceX = [
@@ -20,4 +20,4 @@ type cases = [
 ];
 
 // ============= Your Code Here =============
-type Length<T extends Readonly<Array<unknown>>> = T["length"];
+type Length<T extends readonly unknown[]> = T["length"];

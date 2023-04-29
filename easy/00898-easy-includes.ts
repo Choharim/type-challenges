@@ -26,8 +26,13 @@ type cases = [
 
 // ============= Your Code Here =============
 
-type Includes<T extends Array<unknown>, U> = T extends [infer I, ...infer A]
-  ? Equal<U, I> extends true
+// 🔥 easy 단계에서 가장 어려웠다고 느끼는 문제
+
+type Includes<T extends readonly any[], U> = T extends [
+  infer Item,
+  ...infer Arr
+]
+  ? Equal<Item, U> extends true
     ? true
-    : Includes<A, U>
+    : Includes<Arr, U>
   : false;

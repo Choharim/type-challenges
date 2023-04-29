@@ -1,5 +1,5 @@
 // ============= Test Cases =============
-import type { Equal, Expect } from "./test-utils";
+import type { Equal, Expect } from "../test-utils";
 
 type array = [3, 2, 1];
 
@@ -18,5 +18,9 @@ type errors = [
 ];
 
 // ============= Your Code Here =============
+
+// 방법 1
+type First<T extends unknown[]> = T[number] extends never ? never : T[0];
+
+// 방법 2.
 // type First<T extends unknown[]> = T extends [] ? never : T[0];
-type First<T extends unknown[]> = T extends [] ? never : T[0];

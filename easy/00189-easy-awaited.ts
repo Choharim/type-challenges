@@ -1,5 +1,5 @@
 // ============= Test Cases =============
-import type { Equal, Expect } from "./test-utils";
+import type { Equal, Expect } from "../test-utils";
 
 type X = Promise<string>;
 type Y = Promise<{ field: number }>;
@@ -17,14 +17,8 @@ type cases = [
 
 // ============= Your Code Here =============
 
-//
-// type MyAwaited<T> = T extends Promise<infer R>
-//   ? MyAwaited<R>
-//   : T extends PromiseLike<infer P>
-//   ? P
-//   : T;
-
-/**
- * Promise 타입은 PromiseLike를 포함하고 있으므로 다음과 같이 간단히 변경할 수 있다.
- */
-type MyAwaited<T> = T extends PromiseLike<infer U> ? MyAwaited<U> : T;
+type MyAwaited<T extends PromiseLike<any>> = T extends PromiseLike<infer R>
+  ? R extends PromiseLike<any>
+    ? MyAwaited<R>
+    : R
+  : never;
