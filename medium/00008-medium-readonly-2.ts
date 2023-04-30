@@ -29,12 +29,13 @@ interface Expected {
 }
 
 // ============= Your Code Here =============
-// type Key<T, U> = T extends U ? never : T;
 
-// type MyReadonly2<T, K extends keyof T = keyof T> = {
-//   readonly [key in K]: T[key];
-// } & { [key in Key<keyof T, K>]: T[key] };
-
+// 방법 1. Omit 유틸 타입 사용
 type MyReadonly2<T, K extends keyof T = keyof T> = {
   readonly [key in K]: T[key];
 } & Omit<T, K>;
+
+// 방법 2. 유틸 타입 사용 X
+type MyReadonly<T, K extends keyof T = keyof T> = {
+  readonly [key in K]: T[key];
+} & { [key in keyof T as key extends K ? never : key]: T[key] };
