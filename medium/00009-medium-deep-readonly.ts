@@ -57,8 +57,19 @@ type Expected1 = {
 type Expected2 = { readonly a: string } | { readonly b: number };
 
 // ============= Your Code Here =============
+
+// 방법 1
 type DeepReadonly<T> = {
   readonly [key in keyof T]: keyof T[key] extends never
     ? T[key]
     : DeepReadonly<T[key]>;
 };
+
+// 방법 2
+// type DeepReadonly<T extends object> = T extends Function
+//   ? T
+//   : {
+//       readonly [key in keyof T]: T[key] extends object
+//         ? DeepReadonly<T[key]>
+//         : T[key];
+//     };
