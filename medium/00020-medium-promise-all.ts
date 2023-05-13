@@ -15,8 +15,14 @@ type cases = [
 
 // ============= Your Code Here =============
 
+// 방법 1.
 type ArrayItem<T> = T extends PromiseLike<infer R> ? R : T;
 
 declare function PromiseAll<T extends Array<unknown>>(
   values: readonly [...T]
 ): Promise<{ [key in keyof T]: ArrayItem<T[key]> }>;
+
+// 방법 2. Await 유틸 타입 사용하기
+// declare function PromiseAll<T extends Array<any>>(
+//   values: readonly [...T]
+// ): Promise<{ [key in keyof T]: Awaited<T[key]> }>;
