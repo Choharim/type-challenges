@@ -19,5 +19,5 @@ type cases = [
 type Flatten<T extends Array<any>> = T extends [infer First, ...infer Rest]
   ? First extends Array<any>
     ? Flatten<[...First, ...Rest]>
-    : [First, ...Flatten<[...Rest]>]
+    : [First, ...Flatten<Rest>]
   : [];
